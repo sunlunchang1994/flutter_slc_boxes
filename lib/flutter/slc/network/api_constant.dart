@@ -1,0 +1,34 @@
+class ApiConstant {
+  static const String KEY_ACCEPT = "Accept";
+  static const String VALUE_ACCEPT_ALL = "*/*";
+  static const String KEY_ACCEPT_ENCODING = "Accept-Encoding";
+  static const String VALUE_ACCEPT_ENCODING = "gzip, deflate";
+  static const String KEY_ACCEPT_LANGUAGE = "Accept-Language";
+  static const String KEY_ACCEPT_RANGE = "Accept-Range";
+  static const String KEY_COOKIE = "Cookie";
+  static const String KEY_CONTENT_DISPOSITION = "Content-Disposition";
+  static const String KEY_CONTENT_ENCODING = "Content-Encoding";
+  static const String KEY_CONTENT_LENGTH = "Content-Length";
+  static const String KEY_CONTENT_RANGE = "Content-Range";
+  static const String KEY_CONTENT_TYPE = "Content-Type";
+  static const String VALUE_APPLICATION_URLENCODED = "application/x-www-form-urlencoded";
+  static const String VALUE_APPLICATION_FORM = "multipart/form-data";
+  static const String VALUE_APPLICATION_STREAM = "application/octet-stream";
+  static const String VALUE_APPLICATION_JSON = "application/json";
+  static const String VALUE_APPLICATION_XML = "application/xml";
+  static const String KEY_CACHE_CONTROL = "Cache-Control";
+  static const String KEY_CONNECTION = "Connection";
+  static const String VALUE_KEEP_ALIVE = "keep-alive";
+  static const String VALUE_CLOSE = "close";
+  static const String KEY_DATE = "Date";
+  static const String KEY_EXPIRES = "Expires";
+  static const String KEY_E_TAG = "ETag";
+  static const String KEY_HOST = "Host";
+  static const String KEY_IF_MODIFIED_SINCE = "If-Modified-Since";
+  static const String KEY_IF_NONE_MATCH = "If-None-Match";
+  static const String KEY_LAST_MODIFIED = "Last-Modified";
+  static const String KEY_LOCATION = "Location";
+  static const String KEY_RANGE = "Range";
+  static const String KEY_SET_COOKIE = "Set-Cookie";
+  static const String KEY_USER_AGENT = "User-Agent";
+}
