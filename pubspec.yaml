@@ -1,8 +1,8 @@
 name: flutter_slc_boxes
 description: A new Flutter project.
 version: 0.0.1
-author: sunlunchang1994
-homepage:
+author: sunlunchang
+homepage: https://gitee.com/sunlunchang/flutter_slc_boxes.git
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -14,10 +14,6 @@ dependencies:
 
   #状态管理
   provider: ^5.0.0
-
-  # UI工具---------------------------------------
-  #Toast
-  fluttertoast: ^8.0.4
 
 dev_dependencies:
   flutter_test:
