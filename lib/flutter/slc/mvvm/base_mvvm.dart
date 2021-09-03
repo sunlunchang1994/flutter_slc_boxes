@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 ///基于mvvm架构的的基础界面和BaseVm
 abstract class MvvmStatelessWidget<T extends BaseVm> extends StatelessWidget {
-  MvvmStatelessWidget({Key key}) : super(key: key);
+  MvvmStatelessWidget({Key? key}) : super(key: key);
 
   ///注册事件
   void registerEvent(BuildContext context) {

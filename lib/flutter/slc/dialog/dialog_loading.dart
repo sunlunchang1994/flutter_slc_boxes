@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slc_boxes/flutter/slc/code/observable_field.dart';
+import '../code/observable_field.dart';
 
 ///加载对话框
 class LoadingDialog extends Dialog {
-  final String text;
+  final String? text;
 
-  LoadingDialog({Key key, @required this.text}) : super(key: key);
+  LoadingDialog({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,13 @@ class LoadingDialog extends Dialog {
               children: <Widget>[
                 new CircularProgressIndicator(),
                 new Padding(
-                  padding: const EdgeInsets.only(
-                    top: 16,
-                  ),
-                  child: new Text(text, style: themeData.dialogTheme.titleTextStyle),
-                ),
+                    padding: EdgeInsets.only(
+                      top: text == null ? 16 : 0,
+                    ),
+                    child: text == null
+                        ? null
+                        : new Text(text!,
+                        style: themeData.dialogTheme.titleTextStyle)),
               ],
             ),
           ),
@@ -42,7 +44,7 @@ class LoadingDialog extends Dialog {
 
   ///显示对话框
   static void showLoadingDialog(BuildContext context,
-      {bool barrierDismissible = false, String title = "标题"}) {
+      {bool barrierDismissible = false, String? title}) {
     showDialog(
         context: context,
         barrierDismissible: barrierDismissible,
@@ -56,11 +58,14 @@ class LoadingDialog extends Dialog {
     Navigator.pop(context);
   }
 }
+
 ///loading dialog的控件
 ///使用混入引用
 abstract class LoadingDialogWidget {
-  factory LoadingDialogWidget._() => null;
-  void registerDialogEvent(BuildContext context, LoadingDialogVm loadingDialogVm) {
+  factory LoadingDialogWidget._() => throw "cannot instantiate";
+
+  void registerDialogEvent(
+      BuildContext context, LoadingDialogVm loadingDialogVm) {
     loadingDialogVm.showLoadingOf.addListener(() {
       showLoadingDialog(context, title: loadingDialogVm.showLoadingOf.value);
     });
@@ -71,7 +76,7 @@ abstract class LoadingDialogWidget {
 
   ///显示对话框
   void showLoadingDialog(BuildContext context,
-      {bool barrierDismissible = false, String title = "标题"}) {
+      {bool barrierDismissible = false, String? title}) {
     showDialog(
         context: context,
         barrierDismissible: barrierDismissible,
@@ -85,15 +90,17 @@ abstract class LoadingDialogWidget {
     Navigator.pop(context);
   }
 }
+
 ///loading dialog的VM
 ///使用混入引用
 abstract class LoadingDialogVm {
-  factory LoadingDialogVm._() => null;
+  factory LoadingDialogVm._() => throw "cannot instantiate";
   final ObservableField<String> showLoadingOf = ObservableField(single: true);
-  final ObservableField<String> dismissLoadingOf = ObservableField(single: true);
+  final ObservableField<String> dismissLoadingOf =
+  ObservableField(single: true);
 
-  showLoading({String title}) {
-    showLoadingOf.value = title;
+  showLoading({String? title}) {
+    showLoadingOf.setValueAndNotify(title);
   }
 
   dismissLoading() {

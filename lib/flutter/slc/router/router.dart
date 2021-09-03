@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slc_boxes/flutter/slc/code/observable_field.dart';
+import '../code/observable_field.dart';
 
 abstract class RouterWidget {
-  factory RouterWidget._() => null;
+  factory RouterWidget._() => throw "cannot instantiate";
 
   void registerRouterEvent(BuildContext context, RouterVm routerVm) {
     routerVm.pushParameterOf.addListener(() {
-      PushParameter pushParameter =
+      PushParameter? pushParameter =
           (routerVm.pushParameterOf as ObservableField<PushParameter>).value;
       if (pushParameter != null && pushParameter.page != null) {
         startByPage(context, pushParameter.page,
@@ -40,16 +40,15 @@ abstract class RouterWidget {
 
   ///启动页面
   void startByPage(BuildContext context, Widget page,
-      {RouteSettings routeSettings, int requestCode = 0, bool finish: false}) {
+      {RouteSettings? routeSettings, int requestCode = 0, bool finish: false}) {
     startByPageAndListener(context, page,
-            routeSettings: routeSettings, finish: finish)
+        routeSettings: routeSettings, finish: finish)
         .then((value) => onResult(requestCode, value));
   }
 
   ///启动并且监听
-  Future<dynamic> startByPageAndListener(
-      BuildContext context, Widget page,
-      {RouteSettings routeSettings, bool finish: false}) {
+  Future<dynamic> startByPageAndListener(BuildContext context, Widget page,
+      {RouteSettings? routeSettings, bool finish: false}) {
     if (finish) {
       return Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => page, settings: routeSettings));
@@ -65,8 +64,9 @@ abstract class RouterWidget {
 ///loading dialog的VM
 ///使用混入引用
 abstract class RouterVm {
-  factory RouterVm._() => null;
-  final ObservableField<PushParameter> _pushParameterOf = ObservableField(single: true);
+  factory RouterVm._() => throw "cannot instantiate";
+  final ObservableField<PushParameter> _pushParameterOf =
+  ObservableField(single: true);
   final ObservableField<dynamic> _finishOf = ObservableField(single: true);
 
   Listenable get pushParameterOf => _pushParameterOf;
@@ -74,7 +74,7 @@ abstract class RouterVm {
   Listenable get finishOf => _finishOf;
 
   startByPage(Widget page,
-      {RouteSettings routeSettings, int requestCode = 0, bool finish: false}) {
+      {RouteSettings? routeSettings, int requestCode = 0, bool finish: false}) {
     _pushParameterOf.value = PushParameter(page,
         routeSettings: routeSettings, requestCode: requestCode, finish: finish);
   }
@@ -94,7 +94,7 @@ abstract class RouterVm {
 
 class PushParameter {
   Widget page;
-  RouteSettings routeSettings;
+  RouteSettings? routeSettings;
   int requestCode;
   bool finish;
 

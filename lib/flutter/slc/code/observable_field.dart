@@ -3,14 +3,31 @@ import 'package:flutter/foundation.dart';
 
 ///订阅字段
 ///在ValueNotifier的基础上加上了可传空
-class ObservableField<T> extends ValueNotifier<T> {
+class ObservableField<T> extends ChangeNotifier implements Listenable {
   final bool single;
+  T? _value;
 
-  ObservableField({T value, this.single: false}) : super(value);
+  ObservableField({T? value, this.single: false});
+
+  T? get value => _value;
+
+  set value(T? newValue) {
+    if (_value == newValue) return;
+    _value = newValue;
+    notifyListeners();
+  }
+
+  void setValueAndNotify(T? value) {
+    if (this.value == value) {
+      notifyListeners();
+    } else {
+      this.value = value;
+    }
+  }
 
   @override
   void addListener(listener) {
-    if(hasListeners&&single){
+    if (hasListeners && single) {
       return;
     }
     super.addListener(listener);
